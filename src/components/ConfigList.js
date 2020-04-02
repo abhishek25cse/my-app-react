@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import axios from 'axios'
 
 class ConfigList extends Component {
 
@@ -11,21 +10,22 @@ class ConfigList extends Component {
     }
 
     componentDidMount() {
-        axios.get("localhost:8080/api/config/all")
-        .then(response => {
-            console.log(response);
-            this.setState({configs : response.data});
-        }).catch(error => {
-            console.log("Caought error ",error);
-        })
+        fetch('http://localhost:8080/api/config/all')
+        .then(response => response.json())
+        .then(json =>{
+            console.log(json);
+            this.setState({configs : json});
+        });          
+       
     }
     render() {
         const {configs} = this.state;
         return (
-            <div>This is list
-                {
+            <div>This is the saved Configs                {
                 configs.length ?    
-                configs.map(config => <div key={config.id}>{config.field}</div>) : null
+                configs.map(config => 
+                <ul key={config.id} > {config.field} | {config.desc} | {config.code}</ul>               
+                ) : null
                 }
                 </div>
         )

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import User from './User'
-import Details from './Details'
-import InputComponent from './components/InputComponent'
 import ConfigList from './components/ConfigList'
 
 
@@ -37,9 +34,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />          
-        </header>
-        <InputComponent/>        
-        <ConfigList/>>
+        </header>               
+        <ConfigList/>
       </div>
     );
   }
