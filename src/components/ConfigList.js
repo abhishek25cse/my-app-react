@@ -21,9 +21,11 @@ class ConfigList extends Component {
     render() {
         const {configs} = this.state;
         return (
-            <div>This is the saved Configs                {
+            <div>This is the saved Configs       
+                         {
                 configs.length ?    
-                configs.map(config => 
+                configs.map(config =>
+
                 <ul key={config.id} > {config.field} | {config.desc} | {config.code}</ul>               
                 ) : null
                 }
