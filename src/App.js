@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ConfigList from './components/ConfigList'
-
+import MainComponent from './components/MainComponent'
 
 
 class App extends Component {
@@ -35,7 +34,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />          
         </header>               
-        <ConfigList/>
+       <MainComponent/>
       </div>
     );
   }

@@ -4,48 +4,50 @@ class InputComponent extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        name:'',
+        field:'',
         desc:'',
-        status:''
+        code:''
     };
-    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
  }
 
- handleChangeName(event) {
-    this.setState({name: event.target.value});
-  }
-handleChangeDesc(event) {
-    this.setState({desc: event.target.value});
-  }
-  handleChangeStatus(event) {
-    this.setState({status: event.target.value});
+ handleChange(event) {
+   const target = event.target;
+   const name = target.name;
+   const value = target.value;
+   this.setState ({
+     [name]: value,
+   });
   }
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.name);
+  handleSubmit(event) {  
+    console.log( this.state);
     event.preventDefault();
-  }
-
-
-  componentDidMount() {
-    fetch('http://localhost:8080/users')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ contacts: data })
+    fetch('http://localhost:8080/api/config/save', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        field: this.state.field,
+        desc: this.state.desc,
+        code:this.state.code,
+      })
     })
-    .catch(console.log)
   }
+
     render() { return (
     <form onSubmit={this.handleSubmit}>
          <label>
-            Name:<input type="text" name="name" />
+            Field:<input type="text" name="field" value ={this.state.field} onChange={this.handleChange}/>
          </label>
         <label>
-            Description :<input type="text" name="name" />
+            Description :<input type="text" name="desc" value ={this.state.desc} onChange={this.handleChange} />
         </label>
-       <select>
+       <select value ={this.state.code} name="code" onChange={this.handleChange}>
             <option value="A">Active</option>
             <option value="I">Inactive</option>
         </select>
